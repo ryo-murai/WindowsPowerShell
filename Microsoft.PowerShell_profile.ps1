@@ -6,3 +6,5 @@ iex "function $([char]4) { exit }"
 # alias to vim in standard msys installation
 sal vim "$env:ProgramFiles\Git\share\vim\vim73\vim.exe"
 
+sal ll ls | sort LastWriteTime
+
