@@ -9,3 +9,14 @@ sal vim "$env:ProgramFiles\Git\share\vim\vim73\vim.exe"
 # *nix like aliases
 sal ll ls | sort LastWriteTime
 sal which gcm
+
+function psversion {
+  if (Get-Variable PSVersionTable -ErrorAction SilentlyContinue)
+  {
+    echo $PSVersionTable
+  }
+  else
+  {
+    echo "1.0"
+  }
+}
