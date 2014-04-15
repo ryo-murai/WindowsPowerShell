@@ -32,3 +32,13 @@ function md5sum {
   $hash | % { $hs += $_.ToString("x2") }
   $hs
 }
+
+function cdd {
+  param([string]$dir)
+  $path = "~/dev/$dir/workspaces"
+  if(Test-Path $path) {
+   Set-Location $path
+  } else {
+    echo "no such directory $dir"
+  }
+}
