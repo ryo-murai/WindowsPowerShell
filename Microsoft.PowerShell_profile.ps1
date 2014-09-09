@@ -46,3 +46,9 @@ function cdd {
     echo "no such directory $dir"
   }
 }
+
+function mkgi {
+  param([string]$type)
+
+  irm -Method Get -Uri "https://www.gitignore.io/api/$type"
+}
