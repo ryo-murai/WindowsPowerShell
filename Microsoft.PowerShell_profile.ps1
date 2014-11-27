@@ -3,12 +3,24 @@
 # exit with Ctrl+D<Enter>
 iex "function $([char]4) { exit }"
 
-# alias to vim in standard msys installation
-sal vim "$env:ProgramFiles\Git\share\vim\vim73\vim.exe"
-
 # *nix like aliases
 sal ll ls | sort LastWriteTime
 sal which gcm
+
+function Test-Win64 {
+  return [IntPtr]::size -eq 8
+}
+
+function Get-ProgramFiles32 {
+  if(Test-Win64) {
+    return ${env:ProgramFiles(x86)}
+  }
+
+  return $env:ProgramFiles
+}
+
+# alias to vim in standard msys installation
+sal vim "$(Get-ProgramFiles32)\Git\share\vim\vim73\vim.exe"
 
 function psversion {
   if (Get-Variable PSVersionTable -ErrorAction SilentlyContinue)
@@ -51,4 +63,10 @@ function mkgi {
   param([string]$type)
 
   irm -Method Get -Uri "https://www.gitignore.io/api/$type"
+}
+
+function df {
+  param([System.IO.DirectoryInfo]$dir=$(Get-Item .))
+
+  Get-ChildItem $dir
 }
