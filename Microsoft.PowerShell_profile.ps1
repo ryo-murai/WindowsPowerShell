@@ -33,22 +33,6 @@ function psversion {
   }
 }
 
-function md5sum {
-  param([string]$Files)
-
-  $md5 = [System.Security.Cryptography.MD5]::Create()
-  ls $Files -File | % {
-    $fstream = New-Object IO.StreamReader $(Get-Item $_)
-    $hash = $md5.ComputeHash($fstream.BaseStream)
-    $fstream.Close()
-    $hs = ""
-    $hash | % { $hs += $_.ToString("x2") }
-    New-Object psobject |
-      Add-Member -Name File -type NoteProperty -Value $_ -PassThru |
-      Add-Member -Name Hash -type NoteProperty -Value $hs -PassThru
-  }
-}
-
 function cdd {
   param([string]$dir)
   $path = "~/dev/$dir/workspaces"
