@@ -7,6 +7,9 @@ iex "function $([char]4) { exit }"
 sal ll ls | sort LastWriteTime
 sal which gcm
 
+#
+$env:HOME = $env:USERPROFILE
+
 function Test-Win64 {
   return [IntPtr]::size -eq 8
 }
@@ -49,8 +52,10 @@ function mkgi {
   irm -Method Get -Uri "https://www.gitignore.io/api/$type"
 }
 
-function df {
-  param([System.IO.DirectoryInfo]$dir=$(Get-Item .))
+function du {
+  param([string]$dir="./")
 
-  Get-ChildItem $dir
+  gci $dir | where { $_.PSIsContainer } | % { 
+    Write-Host -NoNewline ($_.Name + "`t"); (gci $_.Name -Recurse | measure -Property Length -Sum).Sum; 
+  }
 }
