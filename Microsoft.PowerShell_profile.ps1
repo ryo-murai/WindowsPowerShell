@@ -23,7 +23,7 @@ function Get-ProgramFiles32 {
 }
 
 # alias to vim in standard msys installation
-sal vim "$(Get-ProgramFiles32)\Git\share\vim\vim73\vim.exe"
+sal vim "${env:ProgramFiles}\Git\usr\bin\vim.exe"
 
 function psversion {
   if (Get-Variable PSVersionTable -ErrorAction SilentlyContinue)
