@@ -43,6 +43,10 @@ function psversion {
   }
 }
 
+if(Test-Path ~/tools/TEE-CLC-12.0.2) {
+  sal tf "${env:USERPROFILE}\tools\TEE-CLC-12.0.2\tf.cmd"
+}
+
 function cdd {
   param([string]$dir)
   $path = "~/dev/$dir/workspaces"
