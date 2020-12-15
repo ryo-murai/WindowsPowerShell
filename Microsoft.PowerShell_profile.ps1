@@ -30,7 +30,9 @@ if(Test-Path ~/tools/vim/vim.exe) {
 }
 
 # set JAVA_HOME
-dir -Directory "~/dev/java/jdk/*" | sort name -Descending  | select FullName -First 1 | % {$env:JAVA_HOME=$_.FullName}
+if(Test-Path "~/dev/java/jdk/*") {
+  dir -Directory "~/dev/java/jdk/*" | sort name -Descending  | select FullName -First 1 | % {$env:JAVA_HOME=$_.FullName}
+}
 
 function psversion {
   if (Get-Variable PSVersionTable -ErrorAction SilentlyContinue)
